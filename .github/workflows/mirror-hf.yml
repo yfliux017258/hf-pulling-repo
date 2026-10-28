@@ -42,7 +42,10 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }} 
           DATASET: ${{ inputs.dataset }} 
         run: |
-          hf download "$DATASET" --repo-type dataset --local-dir data/$DATASET
+          REV_ARG=""
+          REV="$(echo "$REVISION" | xargs)"
+          if [ -n "$REV" ]; then REV_ARG="--revision $REV";
+          hf download "$DATASET" --repo-type dataset $REV_ARG --local-dir data/$DATASET --exclude ".gitattributes" "gitattributes.txt"
           rm -rf data/.cache
 
       # Step 5: Commit and push the downloaded dataset to the repo
