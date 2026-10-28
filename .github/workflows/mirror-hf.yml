@@ -42,14 +42,14 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }} 
           DATASET: ${{ inputs.dataset }} 
         run: |
-          hf download "$DATASET" --repo-type dataset --local-dir data/
+          hf download "$DATASET" --repo-type dataset --local-dir data/$DATASET
           rm -rf data/.cache
 
       # Step 5: Commit and push the downloaded dataset to the repo
       - name: Commit and push changes
         env:
           DATASET: ${{ inputs.dataset }} 
-          REVISION: $${{ inputs.revision }}
+          REVISION: ${{ inputs.revision }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
