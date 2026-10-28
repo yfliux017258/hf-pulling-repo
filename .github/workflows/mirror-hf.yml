@@ -42,7 +42,7 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }} 
           DATASET: ${{ inputs.dataset }} 
         run: |
-          hf download "$DATASET" --repo-type datVISION" --local-dir data/
+          hf download "$DATASET" --repo-type dataset --local-dir data/
           rm -rf data/.cache
 
       # Step 5: Commit and push the downloaded dataset to the repo
