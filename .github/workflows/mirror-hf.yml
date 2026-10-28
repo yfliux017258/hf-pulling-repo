@@ -41,9 +41,8 @@ jobs:
           # Optional: Use if the dataset is private or gated
           HF_TOKEN: ${{ secrets.HF_TOKEN }} 
           DATASET: ${{ inputs.dataset }} 
-          REVISION: $${{ inputs.revision }}
         run: |
-          hf download "$DATASET" --repo-type dataset --revision "$REVISION" --local-dir data/
+          hf download "$DATASET" --repo-type datVISION" --local-dir data/
           rm -rf data/.cache
 
       # Step 5: Commit and push the downloaded dataset to the repo
