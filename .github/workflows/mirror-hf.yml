@@ -41,10 +41,11 @@ jobs:
           # Optional: Use if the dataset is private or gated
           HF_TOKEN: ${{ secrets.HF_TOKEN }} 
           DATASET: ${{ inputs.dataset }} 
+          REVISION: ${{ inputs.revision }}
         run: |
           REV_ARG=""
           REV="$(echo "$REVISION" | xargs)"
-          if [ -n "$REV" ]; then REV_ARG="--revision $REV";
+          if [ -n "$REV" ]; then REV_ARG="--revision $REV"; fi
           hf download "$DATASET" --repo-type dataset $REV_ARG --local-dir data/$DATASET --exclude ".gitattributes" "gitattributes.txt"
           rm -rf data/.cache
 
