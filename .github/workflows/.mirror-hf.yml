@@ -1,0 +1,19 @@
+name:
+on:
+  workflow_dispatch:
+    inputs:
+      dataset:
+        decription: ""
+        required: true
+      revision:
+        description: "branch"
+        default :"main"""
+permissions:
+  contents: write
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pipinstall -U huggingface_hub
+      -name
