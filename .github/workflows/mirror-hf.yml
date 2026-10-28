@@ -46,8 +46,10 @@ jobs:
           REV_ARG=""
           REV="$(echo "$REVISION" | xargs)"
           if [ -n "$REV" ]; then REV_ARG="--revision $REV"; fi
-          hf download "$DATASET" --repo-type dataset $REV_ARG --local-dir data/$DATASET --exclude ".gitattributes" "gitattributes.txt"
+          hf download "$DATASET" --repo-type dataset $REV_ARG --local-dir data/$DATASET
           rm -rf data/.cache
+          find data -name ".gitattributes" -delete
+          rm -f data/gitattributes.txt
 
       # Step 5: Commit and push the downloaded dataset to the repo
       - name: Commit and push changes
